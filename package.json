@@ -1,0 +1,13 @@
+{
+  "name": "my-portfolio",
+  "version": "1.0.0",
+  "description": "This is my portfolio website with a dark/light theme toggle feature.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["portfolio", "website", "personal"],
+  "author": "Nabaparna Chakraborty",
+  "license": "MIT"
+}

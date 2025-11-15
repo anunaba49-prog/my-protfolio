@@ -19,11 +19,50 @@
 
 body.dark-theme {
     --light: #0f0f1e;
-    --text: #e0e0e0;
-    --text-light: #a0a0a0;
+    --text: #f0f0f0;
+    --text-light: #b0b0b0;
     --white: #1a1a2e;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+body.dark-theme .hero-section {
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+}
+
+body.dark-theme .about-section,
+body.dark-theme .experience-section,
+body.dark-theme .contact-section {
+    background: #0f0f1e;
+}
+
+body.dark-theme .research-section,
+body.dark-theme .publications-section {
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+}
+
+body.dark-theme .about-card,
+body.dark-theme .timeline-content,
+body.dark-theme .contact-item {
+    background: #1a1a2e;
+    color: #f0f0f0;
+}
+
+body.dark-theme .research-card,
+body.dark-theme .pub-card,
+body.dark-theme .guidance-item {
+    background: #1a1a2e;
+    color: #f0f0f0;
+}
+
+body.dark-theme .skills-section,
+body.dark-theme .guidance-section {
+    background: #1a1a2e;
+    color: #f0f0f0;
+}
+
+body.dark-theme .footer {
+    background: #0a0a14;
 }
 
 html {

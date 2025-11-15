@@ -867,10 +867,16 @@ body {
 
 .contact-info {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-    max-width: 600px;
+    max-width: 900px;
     margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .contact-info {
+        grid-template-columns: 1fr;
+    }
 }
 
 .contact-item {

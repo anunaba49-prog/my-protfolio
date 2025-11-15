@@ -195,5 +195,39 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const htmlElement = document.documentElement;
+const body = document.body;
+
+// Set dark theme as default
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-theme');
+        updateThemeIcon(true);
+    } else {
+        body.classList.remove('dark-theme');
+        updateThemeIcon(false);
+    }
+}
+
+function updateThemeIcon(isDark) {
+    if (themeToggle) {
+        themeToggle.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    }
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const isDark = body.classList.toggle('dark-theme');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateThemeIcon(isDark);
+    });
+}
+
+// Initialize theme on page load
+initTheme();
+
 // Initialize
 console.log('Portfolio loaded with modern sidebar UI');

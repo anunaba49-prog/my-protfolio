@@ -867,8 +867,10 @@ body {
 
 .contact-info {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr;
     gap: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .contact-item {

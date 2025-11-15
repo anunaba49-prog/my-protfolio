@@ -1292,28 +1292,23 @@ body {
     }
 
     .hero-stats {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
         margin: 1.5rem 0;
     }
 
     .stat {
         text-align: center;
-        padding: 1rem 0;
-        border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-    }
-
-    .stat:last-child {
-        border-bottom: none;
+        padding: 0.8rem 0.5rem;
     }
 
     .stat-number {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+        margin-bottom: 0.3rem;
     }
 
     .stat-label {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 
     .hero-buttons {

@@ -65,6 +65,48 @@ body.dark-theme .footer {
     background: #0a0a14;
 }
 
+body.dark-theme .about-card h3,
+body.dark-theme .research-card h3,
+body.dark-theme .pub-card h4,
+body.dark-theme .timeline-content h3,
+body.dark-theme .contact-details h4,
+body.dark-theme .guidance-section h3,
+body.dark-theme .skills-section h3 {
+    color: #e8eef5;
+}
+
+body.dark-theme .about-card,
+body.dark-theme .research-card,
+body.dark-theme .pub-card,
+body.dark-theme .timeline-content,
+body.dark-theme .contact-item,
+body.dark-theme .guidance-item,
+body.dark-theme .skills-section,
+body.dark-theme .guidance-section {
+    color: #e8eef5;
+}
+
+body.dark-theme .edu-item p,
+body.dark-theme .research-card p,
+body.dark-theme .pub-card p,
+body.dark-theme .timeline-content .position,
+body.dark-theme .timeline-content li,
+body.dark-theme .contact-details p,
+body.dark-theme .guidance-item p {
+    color: #a0aac0;
+}
+
+body.dark-theme .section-header h2 {
+    color: #e8eef5;
+}
+
+body.dark-theme .hero-title {
+    background: linear-gradient(135deg, #e8eef5 0%, #00d4ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 html {
     scroll-behavior: smooth;
 }

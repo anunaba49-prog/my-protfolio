@@ -1293,11 +1293,23 @@ body {
 
     .hero-stats {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .stat {
+        text-align: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+    }
+
+    .stat:last-child {
+        border-bottom: none;
     }
 
     .stat-number {
         font-size: 2rem;
+        margin-bottom: 0.5rem;
     }
 
     .stat-label {

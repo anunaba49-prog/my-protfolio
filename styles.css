@@ -107,6 +107,10 @@ body.dark-theme .hero-title {
     background-clip: text;
 }
 
+body.dark-theme .stat-label {
+    color: #a0aac0;
+}
+
 html {
     scroll-behavior: smooth;
 }

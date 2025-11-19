@@ -1273,8 +1273,9 @@ body {
     }
 
     .stat-label {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         color: var(--text-light);
+        line-height: 1.2;
     }
 
     .hero-buttons {

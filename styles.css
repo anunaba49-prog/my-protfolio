@@ -434,6 +434,8 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    overflow: visible;
+    white-space: nowrap;
 }
 
 .stat-label {

@@ -27,7 +27,7 @@ body.dark-theme {
 }
 
 body.dark-theme .hero-section {
-    background: #2d3142;
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
 }
 
 body.dark-theme .about-section,
@@ -319,34 +319,27 @@ body {
 
 /* Hero Section */
 .hero-section {
-    background: #2d3142;
+    background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
     position: relative;
     overflow: hidden;
-    min-height: 100vh;
-}
-
-.hero-section::before {
-    display: none;
 }
 
 .hero-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 4rem;
     align-items: center;
 }
 
 .hero-left {
     display: flex;
-    flex-direction: column;
-    position: relative;
+    justify-content: center;
 }
 
 .profile-image {
-    width: 100%;
-    max-width: 420px;
+    width: 350px;
     height: auto;
-    animation: none;
+    animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -358,12 +351,11 @@ body {
 .profile-image img {
     width: 100%;
     height: auto;
-    max-height: 500px;
     object-fit: cover;
-    object-position: top;
-    border-radius: 0;
+    border-radius: 15px;
     filter: none;
     border: none;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
 .hero-right {
@@ -371,47 +363,27 @@ body {
 }
 
 @keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.hero-intro-label {
-    color: #00d4ff;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 .hero-title {
     font-size: 3.5rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: #ffffff;
-    line-height: 1.1;
-    background: none;
-    -webkit-background-clip: unset;
-    -webkit-text-fill-color: unset;
-    background-clip: unset;
+    margin-bottom: 0.5rem;
+    color: var(--text);
 }
 
 .hero-subtitle {
     font-size: 1.5rem;
-    color: #ffffff;
+    color: #00d4ff;
     margin-bottom: 1.5rem;
     font-weight: 600;
-    line-height: 1.4;
 }
 
 .hero-description {
-    font-size: 1rem;
-    color: #a0aac0;
+    font-size: 1.1rem;
+    color: var(--text-light);
     margin-bottom: 2rem;
     line-height: 1.8;
 }
@@ -436,7 +408,7 @@ body {
 
 .stat-label {
     display: block;
-    color: #a0aac0;
+    color: var(--text-light);
     font-size: 0.95rem;
     margin-top: 0.5rem;
 }

@@ -12,10 +12,22 @@
     <div id="loginScreen" class="login-screen">
         <div class="login-card">
             <h2><i class="fas fa-lock"></i> Admin Portal</h2>
+            <!-- Step 1: Credentials + CAPTCHA -->
             <form id="loginForm">
                 <input type="text" id="username" placeholder="Username" required>
                 <input type="password" id="password" placeholder="Password" required>
-                <button type="submit" class="btn-admin">Login</button>
+                <div class="captcha-box">
+                    <span id="captchaQuestion">Loading...</span>
+                    <button type="button" class="captcha-refresh" onclick="loadCaptcha()"><i class="fas fa-sync"></i></button>
+                </div>
+                <input type="text" id="captchaInput" placeholder="Enter CAPTCHA answer" required>
+                <button type="submit" class="btn-admin">Send OTP</button>
+            </form>
+            <!-- Step 2: OTP Verification -->
+            <form id="otpForm" class="hidden">
+                <p class="otp-msg">OTP has been generated. Check server console.</p>
+                <input type="text" id="otpInput" placeholder="Enter 6-digit OTP" maxlength="6" required>
+                <button type="submit" class="btn-admin">Verify & Login</button>
             </form>
             <p id="loginError" class="error-msg"></p>
         </div>

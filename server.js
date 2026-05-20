@@ -76,7 +76,48 @@ async function initAdmin() {
 }
 initAdmin();
 
+// OTP storage
+let otpStore = { code: null, expires: null };
+
 // ===== AUTH ROUTES =====
+app.get('/api/captcha', (req, res) => {
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    req.session.captchaAnswer = num1 + num2;
+    res.json({ question: `${num1} + ${num2} = ?` });
+});
+
+app.post('/api/send-otp', async (req, res) => {
+    const { username, password, captcha } = req.body;
+    // Verify captcha
+    if (parseInt(captcha) !== req.session.captchaAnswer) {
+        return res.status(400).json({ error: 'Incorrect CAPTCHA' });
+    }
+    // Verify credentials
+    const admin = getAdmin();
+    if (username !== admin.username || !(await bcrypt.compare(password, admin.password))) {
+        return res.status(401).json({ error: 'Invalid credentials' });
+    }
+    // Generate OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    otpStore = { code: otp, expires: Date.now() + 5 * 60 * 1000 };
+    console.log(`\n========== OTP CODE: ${otp} ==========\n`);
+    res.json({ success: true, message: 'OTP sent. Check server console.' });
+});
+
+app.post('/api/verify-otp', (req, res) => {
+    const { otp } = req.body;
+    if (!otpStore.code || Date.now() > otpStore.expires) {
+        return res.status(400).json({ error: 'OTP expired. Try again.' });
+    }
+    if (otp !== otpStore.code) {
+        return res.status(400).json({ error: 'Invalid OTP' });
+    }
+    otpStore = { code: null, expires: null };
+    req.session.isAdmin = true;
+    res.json({ success: true });
+});
+
 app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
     const admin = getAdmin();

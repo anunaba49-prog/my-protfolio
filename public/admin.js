@@ -1,5 +1,13 @@
 let portfolioData = {};
 
+// Load CAPTCHA on page load
+async function loadCaptcha() {
+    const res = await fetch('/api/captcha');
+    const data = await res.json();
+    document.getElementById('captchaQuestion').textContent = data.question;
+}
+loadCaptcha();
+
 // Check auth on load
 async function checkAuth() {
     const res = await fetch('/api/auth-check');
@@ -12,23 +20,45 @@ async function checkAuth() {
 }
 checkAuth();
 
-// Login
+// Step 1: Send OTP (verify credentials + captcha)
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const res = await fetch('/api/login', {
+    document.getElementById('loginError').textContent = '';
+    const res = await fetch('/api/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             username: document.getElementById('username').value,
-            password: document.getElementById('password').value
+            password: document.getElementById('password').value,
+            captcha: document.getElementById('captchaInput').value
         })
     });
+    const data = await res.json();
+    if (res.ok) {
+        document.getElementById('loginForm').classList.add('hidden');
+        document.getElementById('otpForm').classList.remove('hidden');
+    } else {
+        document.getElementById('loginError').textContent = data.error;
+        loadCaptcha();
+    }
+});
+
+// Step 2: Verify OTP
+document.getElementById('otpForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    document.getElementById('loginError').textContent = '';
+    const res = await fetch('/api/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ otp: document.getElementById('otpInput').value })
+    });
+    const data = await res.json();
     if (res.ok) {
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('adminDashboard').classList.remove('hidden');
         loadData();
     } else {
-        document.getElementById('loginError').textContent = 'Invalid credentials';
+        document.getElementById('loginError').textContent = data.error;
     }
 });
 

@@ -52,18 +52,23 @@ async function loadPortfolioData() {
         }
 
         // Render publications
-        if (data.publications && data.publications.length > 0) {
-            const pubList = document.getElementById('publicationList');
-            if (pubList) {
-                pubList.innerHTML = '<h3 class="pub-list-title">Published Papers</h3>' + data.publications.map(pub => `
+        const pubList = document.getElementById('publicationList');
+        if (pubList) {
+            if (data.publications && data.publications.length > 0) {
+                pubList.innerHTML = data.publications.map((pub, i) => `
                     <div class="publication-item">
-                        <h4>${pub.title}</h4>
-                        <p class="pub-authors">${pub.authors}</p>
-                        <p class="pub-journal">${pub.journal} (${pub.year})</p>
-                        ${pub.doi ? `<a href="https://doi.org/${pub.doi}" target="_blank" class="pub-doi">DOI: ${pub.doi}</a>` : ''}
-                        ${pub.file ? `<a href="${pub.file}" target="_blank" class="pub-download"><i class="fas fa-download"></i> Download</a>` : ''}
+                        <span class="pub-number">${i + 1}.</span>
+                        <div class="pub-info">
+                            <h4>${pub.title}</h4>
+                            <p class="pub-authors">${pub.authors}</p>
+                            <p class="pub-journal">${pub.journal} (${pub.year})</p>
+                            ${pub.doi ? `<a href="https://doi.org/${pub.doi}" target="_blank" class="pub-doi">DOI: ${pub.doi}</a>` : ''}
+                            ${pub.file ? `<a href="${pub.file}" target="_blank" class="pub-download"><i class="fas fa-download"></i> Download PDF</a>` : ''}
+                        </div>
                     </div>
                 `).join('');
+            } else {
+                pubList.innerHTML = '<p class="empty-message">Publications will be updated soon.</p>';
             }
         }
 
@@ -255,6 +260,19 @@ document.querySelectorAll('.about-card, .research-card, .pub-card, .contact-item
 
 // Load data on page load
 loadPortfolioData();
+
+// Toggle publications list
+function togglePublications() {
+    const list = document.getElementById('publicationList');
+    const btn = document.getElementById('viewAllPubsBtn');
+    if (list.classList.contains('hidden')) {
+        list.classList.remove('hidden');
+        btn.innerHTML = '<i class="fas fa-times"></i> Hide Publications';
+    } else {
+        list.classList.add('hidden');
+        btn.innerHTML = '<i class="fas fa-list"></i> View All Publications';
+    }
+}
 
 // Collaborator details modal
 function showCollaboratorDetails(el) {

@@ -17,7 +17,7 @@
                 <input type="text" id="username" placeholder="Username" required>
                 <input type="password" id="password" placeholder="Password" required>
                 <div class="captcha-box">
-                    <span id="captchaQuestion">Loading...</span>
+                    <span id="captchaQuestion"></span>
                     <button type="button" class="captcha-refresh" onclick="loadCaptcha()"><i class="fas fa-sync"></i></button>
                 </div>
                 <input type="text" id="captchaInput" placeholder="Enter CAPTCHA answer" required>
@@ -249,6 +249,15 @@
         </main>
     </div>
 
+    <script>
+        // Generate captcha immediately
+        (function() {
+            var n1 = Math.floor(Math.random() * 10) + 1;
+            var n2 = Math.floor(Math.random() * 10) + 1;
+            var el = document.getElementById('captchaQuestion');
+            if (el) el.textContent = n1 + ' + ' + n2 + ' = ?';
+        })();
+    </script>
     <script src="admin.js"></script>
 </body>
 </html>

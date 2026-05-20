@@ -1,10 +1,19 @@
 let portfolioData = {};
+let captchaAnswer = null;
 
 // Load CAPTCHA on page load
 async function loadCaptcha() {
-    const res = await fetch('/api/captcha');
-    const data = await res.json();
-    document.getElementById('captchaQuestion').textContent = data.question;
+    try {
+        const res = await fetch('/api/captcha');
+        const data = await res.json();
+        document.getElementById('captchaQuestion').textContent = data.question;
+    } catch (err) {
+        // Fallback: generate captcha locally
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        const num2 = Math.floor(Math.random() * 10) + 1;
+        captchaAnswer = num1 + num2;
+        document.getElementById('captchaQuestion').textContent = num1 + ' + ' + num2 + ' = ?';
+    }
 }
 loadCaptcha();
 

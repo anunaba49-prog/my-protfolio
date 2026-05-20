@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - Portfolio Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-card">
+            <h2><i class="fas fa-lock"></i> Admin Portal</h2>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="btn-admin">Login</button>
+            </form>
+            <p id="loginError" class="error-msg"></p>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="admin-dashboard hidden">
+        <header class="admin-header">
+            <h1><i class="fas fa-cog"></i> Portfolio Admin</h1>
+            <div class="admin-actions">
+                <a href="/" target="_blank" class="btn-view"><i class="fas fa-eye"></i> View Site</a>
+                <button id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </header>
+
+        <nav class="admin-nav">
+            <button class="admin-tab active" data-panel="profile"><i class="fas fa-user"></i> Profile</button>
+            <button class="admin-tab" data-panel="stats"><i class="fas fa-chart-bar"></i> Stats</button>
+            <button class="admin-tab" data-panel="publications"><i class="fas fa-book"></i> Publications</button>
+            <button class="admin-tab" data-panel="students"><i class="fas fa-users"></i> Students</button>
+            <button class="admin-tab" data-panel="gallery"><i class="fas fa-images"></i> Gallery</button>
+            <button class="admin-tab" data-panel="feedback"><i class="fas fa-comments"></i> Feedback</button>
+            <button class="admin-tab" data-panel="experience"><i class="fas fa-briefcase"></i> Experience</button>
+        </nav>
+
+        <main class="admin-main">
+            <!-- Profile Panel -->
+            <div class="admin-panel active" id="panel-profile">
+                <h2>Edit Profile</h2>
+                <form id="profileForm" class="admin-form">
+                    <label>Name</label>
+                    <input type="text" id="pName" placeholder="Full Name">
+                    <label>Title</label>
+                    <input type="text" id="pTitle" placeholder="e.g. PhD in Applied Physics">
+                    <label>Description</label>
+                    <textarea id="pDesc" rows="4" placeholder="Short bio"></textarea>
+                    <label>Email</label>
+                    <input type="email" id="pEmail" placeholder="Email">
+                    <label>Location</label>
+                    <input type="text" id="pLocation" placeholder="Location">
+                    <label>ORCID</label>
+                    <input type="text" id="pOrcid" placeholder="ORCID ID">
+                    <label>LinkedIn URL</label>
+                    <input type="url" id="pLinkedin" placeholder="LinkedIn URL">
+                    <button type="submit" class="btn-admin">Save Profile</button>
+                </form>
+                <div class="upload-section">
+                    <h3>Profile Picture</h3>
+                    <form id="profilePicForm" enctype="multipart/form-data">
+                        <input type="file" id="profilePic" accept="image/*">
+                        <button type="submit" class="btn-admin">Upload Picture</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Stats Panel -->
+            <div class="admin-panel" id="panel-stats">
+                <h2>Edit Stats</h2>
+                <form id="statsForm" class="admin-form">
+                    <label>PhD Students</label>
+                    <input type="number" id="sPhdStudents" placeholder="Number">
+                    <label>Publications</label>
+                    <input type="text" id="sPublications" placeholder="e.g. 50+">
+                    <label>Years Experience</label>
+                    <input type="text" id="sExperience" placeholder="e.g. 3+">
+                    <label>h-index</label>
+                    <input type="number" id="sHindex" placeholder="Number">
+                    <button type="submit" class="btn-admin">Save Stats</button>
+                </form>
+            </div>
+
+            <!-- Publications Panel -->
+            <div class="admin-panel" id="panel-publications">
+                <h2>Manage Publications</h2>
+                <form id="pubForm" class="admin-form" enctype="multipart/form-data">
+                    <label>Title</label>
+                    <input type="text" id="pubTitle" placeholder="Paper title" required>
+                    <label>Authors</label>
+                    <input type="text" id="pubAuthors" placeholder="Author names" required>
+                    <label>Journal</label>
+                    <input type="text" id="pubJournal" placeholder="Journal name" required>
+                    <label>Year</label>
+                    <input type="text" id="pubYear" placeholder="Year" required>
+                    <label>DOI</label>
+                    <input type="text" id="pubDoi" placeholder="DOI (optional)">
+                    <label>Abstract</label>
+                    <textarea id="pubAbstract" rows="3" placeholder="Abstract (optional)"></textarea>
+                    <label>PDF File</label>
+                    <input type="file" id="pubFile" accept=".pdf">
+                    <button type="submit" class="btn-admin">Add Publication</button>
+                </form>
+                <div class="items-list" id="pubList"></div>
+            </div>
+
+            <!-- Students Panel -->
+            <div class="admin-panel" id="panel-students">
+                <h2>Manage Students</h2>
+                <form id="studentForm" class="admin-form">
+                    <label>Student Name</label>
+                    <input type="text" id="stuName" placeholder="Name" required>
+                    <label>Degree</label>
+                    <select id="stuDegree">
+                        <option value="PhD">PhD</option>
+                        <option value="MSc">MSc</option>
+                        <option value="BSc">BSc</option>
+                    </select>
+                    <label>Research Topic</label>
+                    <input type="text" id="stuTopic" placeholder="Research topic" required>
+                    <label>Year</label>
+                    <input type="text" id="stuYear" placeholder="Year of enrollment">
+                    <label>Status</label>
+                    <select id="stuStatus">
+                        <option value="ongoing">Ongoing</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <button type="submit" class="btn-admin">Add Student</button>
+                </form>
+                <div class="items-list" id="studentList"></div>
+            </div>
+
+            <!-- Gallery Panel -->
+            <div class="admin-panel" id="panel-gallery">
+                <h2>Manage Gallery</h2>
+                <h3>Upload Photo</h3>
+                <form id="photoForm" class="admin-form" enctype="multipart/form-data">
+                    <label>Caption</label>
+                    <input type="text" id="photoCaption" placeholder="Photo caption">
+                    <label>Photo</label>
+                    <input type="file" id="photoFile" accept="image/*" required>
+                    <button type="submit" class="btn-admin">Upload Photo</button>
+                </form>
+                <div class="items-list" id="photoList"></div>
+
+                <h3>Add Video</h3>
+                <form id="videoForm" class="admin-form">
+                    <label>Title</label>
+                    <input type="text" id="videoTitle" placeholder="Video title" required>
+                    <label>Embed URL</label>
+                    <input type="url" id="videoUrl" placeholder="YouTube embed URL" required>
+                    <label>Description</label>
+                    <input type="text" id="videoDesc" placeholder="Description">
+                    <button type="submit" class="btn-admin">Add Video</button>
+                </form>
+                <div class="items-list" id="videoList"></div>
+
+                <h3>Upload Certificate</h3>
+                <form id="certForm" class="admin-form" enctype="multipart/form-data">
+                    <label>Title</label>
+                    <input type="text" id="certTitle" placeholder="Certificate title">
+                    <label>Certificate Image</label>
+                    <input type="file" id="certFile" accept="image/*" required>
+                    <button type="submit" class="btn-admin">Upload Certificate</button>
+                </form>
+                <div class="items-list" id="certList"></div>
+            </div>
+
+            <!-- Feedback Panel -->
+            <div class="admin-panel" id="panel-feedback">
+                <h2>Manage Feedback</h2>
+                <form id="feedbackForm" class="admin-form">
+                    <label>Name</label>
+                    <input type="text" id="fbName" placeholder="Person's name" required>
+                    <label>Role</label>
+                    <input type="text" id="fbRole" placeholder="e.g. PhD Student, Professor" required>
+                    <label>Type</label>
+                    <select id="fbType">
+                        <option value="Student">Student</option>
+                        <option value="Colleague">Colleague</option>
+                        <option value="Senior">Senior</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <label>Message</label>
+                    <textarea id="fbMessage" rows="4" placeholder="Feedback message" required></textarea>
+                    <button type="submit" class="btn-admin">Add Feedback</button>
+                </form>
+                <div class="items-list" id="feedbackList"></div>
+            </div>
+
+            <!-- Experience Panel -->
+            <div class="admin-panel" id="panel-experience">
+                <h2>Manage Experience</h2>
+                <form id="expForm" class="admin-form">
+                    <label>Title</label>
+                    <input type="text" id="expTitle" placeholder="Job title" required>
+                    <label>Position/Organization</label>
+                    <input type="text" id="expPosition" placeholder="Organization" required>
+                    <label>Date</label>
+                    <input type="text" id="expDate" placeholder="e.g. April 2022 - Present" required>
+                    <label>Duties (one per line)</label>
+                    <textarea id="expDuties" rows="4" placeholder="One duty per line"></textarea>
+                    <button type="submit" class="btn-admin">Add Experience</button>
+                </form>
+                <div class="items-list" id="expList"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

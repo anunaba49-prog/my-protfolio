@@ -1,0 +1,51 @@
+{
+  "profile": {
+    "name": "Dr. Nabaparna Chakraborty",
+    "title": "PhD in Applied Physics",
+    "description": "Pioneering research in nanotechnology, optoelectronics, and green energy solutions. Dedicated to advancing material science through innovative acoustic and spectroscopic techniques.",
+    "email": "nabaparnac@gmail.com",
+    "location": "Lovely Professional University, Phagwara, Punjab, India",
+    "orcid": "0000-0003-3891-0408",
+    "linkedin": "http://linkedin.com/in/dr-nabaparna-chakraborty-aa13121b5",
+    "scopus": "https://www.scopus.com/authid/detail.uri?authorId=57202991199",
+    "googleScholar": "https://scholar.google.co.in/citations?user=WiznphUAAAAJ&hl=en",
+    "researchGate": "https://www.researchgate.net/profile/Nabaparna-Chakraborty-2"
+  },
+  "stats": {
+    "phdStudents": 4,
+    "publications": "50+",
+    "yearsExperience": "3+",
+    "hIndex": 16
+  },
+  "publications": [],
+  "students": [],
+  "photos": [],
+  "videos": [],
+  "certificates": [],
+  "feedback": [],
+  "experience": [
+    {
+      "id": "1",
+      "title": "Assistant Professor",
+      "position": "Department of Physics, Lovely Professional University",
+      "date": "April 2022 - Present",
+      "duties": [
+        "Faculty In-charge of Laboratory in Central Instrumentation Facility",
+        "Overseeing Advanced Microscopic Studies Centre",
+        "Managing Molecular Spectroscopy Centre",
+        "Mentoring PhD and MSc students"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Teaching Assistant",
+      "position": "Department of Physics, Lovely Professional University",
+      "date": "December 2018 - May 2020",
+      "duties": [
+        "Assisted in undergraduate and graduate courses",
+        "Laboratory supervision and mentoring",
+        "Research support and guidance"
+      ]
+    }
+  ]
+}

@@ -259,6 +259,33 @@ app.delete('/api/admin/certificates/:id', requireAuth, (req, res) => {
     res.json({ success: true });
 });
 
+// Collaborators CRUD
+app.post('/api/admin/collaborators', requireAuth, upload.single('file'), (req, res) => {
+    if (!req.file) return res.status(400).json({ error: 'No photo uploaded' });
+    const data = getData();
+    if (!data.collaborators) data.collaborators = [];
+    const collab = {
+        id: Date.now().toString(),
+        name: req.body.name,
+        designation: req.body.designation,
+        institution: req.body.institution,
+        expertise: req.body.expertise || '',
+        email: req.body.email || '',
+        website: req.body.website || '',
+        photo: '/uploads/photos/' + req.file.filename
+    };
+    data.collaborators.push(collab);
+    saveData(data);
+    res.json({ success: true, collaborator: collab });
+});
+
+app.delete('/api/admin/collaborators/:id', requireAuth, (req, res) => {
+    const data = getData();
+    data.collaborators = (data.collaborators || []).filter(c => c.id !== req.params.id);
+    saveData(data);
+    res.json({ success: true });
+});
+
 // Feedback CRUD
 app.post('/api/admin/feedback', requireAuth, (req, res) => {
     const data = getData();

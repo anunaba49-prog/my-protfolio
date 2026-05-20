@@ -127,6 +127,15 @@ function renderLists() {
         </div>
     `).join('');
 
+    // Collaborators
+    const collabList = document.getElementById('collabList');
+    collabList.innerHTML = (portfolioData.collaborators || []).map(c => `
+        <div class="list-item">
+            <div class="list-item-info"><h4>${c.name}</h4><p>${c.designation} - ${c.institution}</p></div>
+            <button class="btn-delete" onclick="deleteItem('collaborators','${c.id}')"><i class="fas fa-trash"></i></button>
+        </div>
+    `).join('');
+
     // Experience
     const expList = document.getElementById('expList');
     expList.innerHTML = (portfolioData.experience || []).map(e => `
@@ -269,6 +278,21 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
             message: document.getElementById('fbMessage').value
         })
     });
+    e.target.reset();
+    loadData();
+});
+
+document.getElementById('collabForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('name', document.getElementById('collabName').value);
+    formData.append('designation', document.getElementById('collabDesignation').value);
+    formData.append('institution', document.getElementById('collabInstitution').value);
+    formData.append('expertise', document.getElementById('collabExpertise').value);
+    formData.append('email', document.getElementById('collabEmail').value);
+    formData.append('website', document.getElementById('collabWebsite').value);
+    formData.append('file', document.getElementById('collabPhoto').files[0]);
+    await fetch('/api/admin/collaborators', { method: 'POST', body: formData });
     e.target.reset();
     loadData();
 });

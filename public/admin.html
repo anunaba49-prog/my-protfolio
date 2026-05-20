@@ -36,6 +36,7 @@
             <button class="admin-tab" data-panel="stats"><i class="fas fa-chart-bar"></i> Stats</button>
             <button class="admin-tab" data-panel="publications"><i class="fas fa-book"></i> Publications</button>
             <button class="admin-tab" data-panel="students"><i class="fas fa-users"></i> Students</button>
+            <button class="admin-tab" data-panel="collaborators"><i class="fas fa-handshake"></i> Collaborators</button>
             <button class="admin-tab" data-panel="gallery"><i class="fas fa-images"></i> Gallery</button>
             <button class="admin-tab" data-panel="feedback"><i class="fas fa-comments"></i> Feedback</button>
             <button class="admin-tab" data-panel="experience"><i class="fas fa-briefcase"></i> Experience</button>
@@ -134,6 +135,29 @@
                     <button type="submit" class="btn-admin">Add Student</button>
                 </form>
                 <div class="items-list" id="studentList"></div>
+            </div>
+
+            <!-- Collaborators Panel -->
+            <div class="admin-panel" id="panel-collaborators">
+                <h2>Manage Collaborators</h2>
+                <form id="collabForm" class="admin-form" enctype="multipart/form-data">
+                    <label>Name</label>
+                    <input type="text" id="collabName" placeholder="Collaborator name" required>
+                    <label>Designation</label>
+                    <input type="text" id="collabDesignation" placeholder="e.g. Professor" required>
+                    <label>Institution</label>
+                    <input type="text" id="collabInstitution" placeholder="University/Organization" required>
+                    <label>Expertise</label>
+                    <input type="text" id="collabExpertise" placeholder="Area of expertise">
+                    <label>Email</label>
+                    <input type="email" id="collabEmail" placeholder="Email (optional)">
+                    <label>Website</label>
+                    <input type="url" id="collabWebsite" placeholder="Website URL (optional)">
+                    <label>Photo</label>
+                    <input type="file" id="collabPhoto" accept="image/*" required>
+                    <button type="submit" class="btn-admin">Add Collaborator</button>
+                </form>
+                <div class="items-list" id="collabList"></div>
             </div>
 
             <!-- Gallery Panel -->

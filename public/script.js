@@ -67,6 +67,20 @@ async function loadPortfolioData() {
             }
         }
 
+        // Render collaborators
+        if (data.collaborators && data.collaborators.length > 0) {
+            const grid = document.getElementById('collaboratorsGrid');
+            if (grid) {
+                grid.innerHTML = data.collaborators.map(c => `
+                    <div class="collaborator-card" onclick="showCollaboratorDetails(this)" data-name="${c.name}" data-designation="${c.designation}" data-institution="${c.institution}" data-expertise="${c.expertise}" data-email="${c.email}" data-website="${c.website}">
+                        <img src="${c.photo}" alt="${c.name}" class="collaborator-photo">
+                        <h4>${c.name}</h4>
+                        <p>${c.designation}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
         // Render students
         if (data.students && data.students.length > 0) {
             const grid = document.getElementById('studentsGrid');
@@ -241,4 +255,33 @@ document.querySelectorAll('.about-card, .research-card, .pub-card, .contact-item
 
 // Load data on page load
 loadPortfolioData();
+
+// Collaborator details modal
+function showCollaboratorDetails(el) {
+    const name = el.dataset.name;
+    const designation = el.dataset.designation;
+    const institution = el.dataset.institution;
+    const expertise = el.dataset.expertise;
+    const email = el.dataset.email;
+    const website = el.dataset.website;
+    const photo = el.querySelector('img').src;
+
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <button class="modal-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+            <img src="${photo}" alt="${name}" class="modal-photo">
+            <h3>${name}</h3>
+            <p class="modal-designation">${designation}</p>
+            <p class="modal-institution">${institution}</p>
+            ${expertise ? `<p class="modal-expertise"><strong>Expertise:</strong> ${expertise}</p>` : ''}
+            ${email ? `<p><a href="mailto:${email}">${email}</a></p>` : ''}
+            ${website ? `<p><a href="${website}" target="_blank">Visit Website</a></p>` : ''}
+        </div>
+    `;
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+    document.body.appendChild(modal);
+}
+
 console.log('Portfolio loaded');

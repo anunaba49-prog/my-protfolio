@@ -68,9 +68,10 @@ function requireAuth(req, res, next) {
 async function initAdmin() {
     const admin = getAdmin();
     if (admin.password.startsWith('$2a$10$default')) {
-        admin.password = await bcrypt.hash('admin123', 10);
+        admin.password = await bcrypt.hash('2Anu@1234', 10);
+        admin.username = 'Nabaanu';
         saveAdmin(admin);
-        console.log('Admin initialized - Username: admin, Password: admin123');
+        console.log('Admin initialized - Username: Nabaanu');
     }
 }
 initAdmin();

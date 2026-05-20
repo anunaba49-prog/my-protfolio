@@ -37,6 +37,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     if (res.ok) {
         document.getElementById('loginForm').classList.add('hidden');
         document.getElementById('otpForm').classList.remove('hidden');
+        document.getElementById('otpMsg').textContent = data.message;
     } else {
         document.getElementById('loginError').textContent = data.error;
         loadCaptcha();

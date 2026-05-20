@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
+const nodemailer = require('nodemailer');
 const path = require('path');
 const fs = require('fs');
 
@@ -79,6 +80,43 @@ initAdmin();
 // OTP storage
 let otpStore = { code: null, expires: null };
 
+// Email configuration
+const EMAIL_USER = process.env.EMAIL_USER || 'nabaparnac@gmail.com';
+const EMAIL_PASS = process.env.EMAIL_PASS || 'YOUR_APP_PASSWORD_HERE';
+const ADMIN_EMAIL = 'nabaparnac@gmail.com';
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: EMAIL_USER,
+        pass: EMAIL_PASS
+    }
+});
+
+async function sendOTPEmail(otp) {
+    const mailOptions = {
+        from: `"Portfolio Admin" <${EMAIL_USER}>`,
+        to: ADMIN_EMAIL,
+        subject: 'Admin Portal - OTP Verification',
+        html: `
+            <div style="font-family: Arial, sans-serif; padding: 20px; background: #0a0e27; color: #e8eef5; border-radius: 10px;">
+                <h2 style="color: #00d4ff;">Admin Portal OTP</h2>
+                <p>Your one-time password for admin login:</p>
+                <h1 style="color: #00d4ff; letter-spacing: 5px; font-size: 2.5rem;">${otp}</h1>
+                <p style="color: #a0aac0;">This OTP expires in 5 minutes. Do not share it with anyone.</p>
+            </div>
+        `
+    };
+    try {
+        await transporter.sendMail(mailOptions);
+        return true;
+    } catch (err) {
+        console.log('Email send failed:', err.message);
+        console.log(`\n========== OTP CODE: ${otp} ==========\n`);
+        return false;
+    }
+}
+
 // ===== AUTH ROUTES =====
 app.get('/api/captcha', (req, res) => {
     const num1 = Math.floor(Math.random() * 10) + 1;
@@ -101,8 +139,13 @@ app.post('/api/send-otp', async (req, res) => {
     // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     otpStore = { code: otp, expires: Date.now() + 5 * 60 * 1000 };
-    console.log(`\n========== OTP CODE: ${otp} ==========\n`);
-    res.json({ success: true, message: 'OTP sent. Check server console.' });
+    // Send via email
+    const sent = await sendOTPEmail(otp);
+    if (sent) {
+        res.json({ success: true, message: 'OTP sent to your registered email.' });
+    } else {
+        res.json({ success: true, message: 'OTP generated. Check server console (email not configured).' });
+    }
 });
 
 app.post('/api/verify-otp', (req, res) => {

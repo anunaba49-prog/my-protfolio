@@ -385,12 +385,16 @@ body.dark-theme .profile-image::after {
 }
 
 .hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
+    font-size: 3.5rem !important;
+    font-weight: 700 !important;
     margin-bottom: 0.5rem;
-    color: #ffffff;
+    color: #ffffff !important;
     text-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 40px rgba(0, 212, 255, 0.1);
     line-height: 1.2;
+    -webkit-text-fill-color: #ffffff !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
 }
 
 .hero-subtitle {

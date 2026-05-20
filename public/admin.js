@@ -1,55 +1,64 @@
 let portfolioData = {};
-let captchaAnswer = null;
+let localCaptchaAnswer = null;
 
-// Load CAPTCHA on page load
+// Load CAPTCHA
 async function loadCaptcha() {
-    try {
-        const res = await fetch('/api/captcha');
-        const data = await res.json();
-        document.getElementById('captchaQuestion').textContent = data.question;
-    } catch (err) {
-        // Fallback: generate captcha locally
-        const num1 = Math.floor(Math.random() * 10) + 1;
-        const num2 = Math.floor(Math.random() * 10) + 1;
-        captchaAnswer = num1 + num2;
-        document.getElementById('captchaQuestion').textContent = num1 + ' + ' + num2 + ' = ?';
-    }
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    localCaptchaAnswer = num1 + num2;
+    document.getElementById('captchaQuestion').textContent = num1 + ' + ' + num2 + ' = ?';
+    // Also set on server
+    try { await fetch('/api/captcha'); } catch(e) {}
 }
 loadCaptcha();
 
 // Check auth on load
 async function checkAuth() {
-    const res = await fetch('/api/auth-check');
-    const data = await res.json();
-    if (data.authenticated) {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('adminDashboard').classList.remove('hidden');
-        loadData();
-    }
+    try {
+        const res = await fetch('/api/auth-check');
+        const data = await res.json();
+        if (data.authenticated) {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            loadData();
+        }
+    } catch(e) {}
 }
 checkAuth();
 
-// Step 1: Send OTP (verify credentials + captcha)
+// Step 1: Verify credentials + captcha, then send OTP
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     document.getElementById('loginError').textContent = '';
-    const res = await fetch('/api/send-otp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            username: document.getElementById('username').value,
-            password: document.getElementById('password').value,
-            captcha: document.getElementById('captchaInput').value
-        })
-    });
-    const data = await res.json();
-    if (res.ok) {
-        document.getElementById('loginForm').classList.add('hidden');
-        document.getElementById('otpForm').classList.remove('hidden');
-        document.getElementById('otpMsg').textContent = data.message;
-    } else {
-        document.getElementById('loginError').textContent = data.error;
+    
+    const captchaInput = parseInt(document.getElementById('captchaInput').value);
+    if (captchaInput !== localCaptchaAnswer) {
+        document.getElementById('loginError').textContent = 'Incorrect CAPTCHA';
         loadCaptcha();
+        return;
+    }
+
+    try {
+        const res = await fetch('/api/send-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+                captcha: document.getElementById('captchaInput').value
+            })
+        });
+        const data = await res.json();
+        if (res.ok) {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('otpForm').classList.remove('hidden');
+            document.getElementById('otpMsg').textContent = data.message;
+        } else {
+            document.getElementById('loginError').textContent = data.error;
+            loadCaptcha();
+        }
+    } catch(err) {
+        document.getElementById('loginError').textContent = 'Server not reachable. Run: npm start';
     }
 });
 
@@ -57,18 +66,22 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 document.getElementById('otpForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     document.getElementById('loginError').textContent = '';
-    const res = await fetch('/api/verify-otp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ otp: document.getElementById('otpInput').value })
-    });
-    const data = await res.json();
-    if (res.ok) {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('adminDashboard').classList.remove('hidden');
-        loadData();
-    } else {
-        document.getElementById('loginError').textContent = data.error;
+    try {
+        const res = await fetch('/api/verify-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ otp: document.getElementById('otpInput').value })
+        });
+        const data = await res.json();
+        if (res.ok) {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            loadData();
+        } else {
+            document.getElementById('loginError').textContent = data.error;
+        }
+    } catch(err) {
+        document.getElementById('loginError').textContent = 'Server error. Try again.';
     }
 });
 

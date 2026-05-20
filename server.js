@@ -126,15 +126,11 @@ app.get('/api/captcha', (req, res) => {
 });
 
 app.post('/api/send-otp', async (req, res) => {
-    const { username, password, captcha } = req.body;
-    // Verify captcha
-    if (parseInt(captcha) !== req.session.captchaAnswer) {
-        return res.status(400).json({ error: 'Incorrect CAPTCHA' });
-    }
+    const { username, password } = req.body;
     // Verify credentials
     const admin = getAdmin();
     if (username !== admin.username || !(await bcrypt.compare(password, admin.password))) {
-        return res.status(401).json({ error: 'Invalid credentials' });
+        return res.status(401).json({ error: 'Invalid username or password' });
     }
     // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
@@ -144,7 +140,7 @@ app.post('/api/send-otp', async (req, res) => {
     if (sent) {
         res.json({ success: true, message: 'OTP sent to your registered email.' });
     } else {
-        res.json({ success: true, message: 'OTP generated. Check server console (email not configured).' });
+        res.json({ success: true, message: 'OTP generated. Check server console.' });
     }
 });
 

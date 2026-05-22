@@ -348,7 +348,7 @@ app.post('/api/admin/journalLogos', requireAuth, upload.single('file'), (req, re
     const logo = {
         id: Date.now().toString(),
         name: req.body.name || '',
-        path: '/uploads/photos/' + req.file.filename
+        path: '/uploads/documents/' + req.file.filename
     };
     data.journalLogos.push(logo);
     saveData(data);

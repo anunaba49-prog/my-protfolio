@@ -210,6 +210,7 @@ const sidebar = document.getElementById('sidebar');
 if (sidebarToggle) {
     sidebarToggle.addEventListener('click', () => {
         sidebar.classList.toggle('collapsed');
+        sidebarToggle.classList.toggle('collapsed');
         const icon = sidebarToggle.querySelector('i');
         if (sidebar.classList.contains('collapsed')) {
             icon.className = 'fas fa-chevron-right';

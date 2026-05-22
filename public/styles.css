@@ -306,9 +306,9 @@ body {
 
 /* Sidebar Toggle */
 .sidebar-toggle {
-    position: absolute;
+    position: fixed;
     top: 50%;
-    right: -15px;
+    left: 265px;
     transform: translateY(-50%);
     width: 30px;
     height: 30px;
@@ -330,14 +330,14 @@ body {
     box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
 }
 
+.sidebar-toggle.collapsed {
+    left: 5px;
+}
+
 .sidebar.collapsed {
     width: 0;
     padding: 0;
     overflow: hidden;
-}
-
-.sidebar.collapsed .sidebar-toggle {
-    right: -40px;
 }
 
 .sidebar.collapsed ~ .main-content {

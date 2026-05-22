@@ -119,6 +119,10 @@ function populateFields() {
     document.getElementById('pLocation').value = p.location || '';
     document.getElementById('pOrcid').value = p.orcid || '';
     document.getElementById('pLinkedin').value = p.linkedin || '';
+    document.getElementById('pLinkedinName').value = p.linkedinName || '';
+    document.getElementById('pScopus').value = p.scopus || '';
+    document.getElementById('pScholar').value = p.googleScholar || '';
+    document.getElementById('pResearchGate').value = p.researchGate || '';
     document.getElementById('sPhdStudents').value = s.phdStudents || '';
     document.getElementById('sPublications').value = s.publications || '';
     document.getElementById('sExperience').value = s.yearsExperience || '';
@@ -227,7 +231,11 @@ document.getElementById('profileForm').addEventListener('submit', async (e) => {
             email: document.getElementById('pEmail').value,
             location: document.getElementById('pLocation').value,
             orcid: document.getElementById('pOrcid').value,
-            linkedin: document.getElementById('pLinkedin').value
+            linkedin: document.getElementById('pLinkedin').value,
+            linkedinName: document.getElementById('pLinkedinName').value,
+            scopus: document.getElementById('pScopus').value,
+            googleScholar: document.getElementById('pScholar').value,
+            researchGate: document.getElementById('pResearchGate').value
         })
     });
     alert('Profile saved!');

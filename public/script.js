@@ -31,6 +31,26 @@ async function loadPortfolioData() {
                 const desc = document.getElementById('heroDesc');
                 if (desc) desc.textContent = data.profile.description;
             }
+            // Update contact section
+            const contactEmail = document.getElementById('contactEmail');
+            if (contactEmail && data.profile.email) {
+                contactEmail.textContent = data.profile.email;
+                contactEmail.href = 'mailto:' + data.profile.email;
+            }
+            const contactLocation = document.getElementById('contactLocation');
+            if (contactLocation && data.profile.location) {
+                contactLocation.innerHTML = data.profile.location.replace(', ', '<br>');
+            }
+            const contactOrcid = document.getElementById('contactOrcid');
+            if (contactOrcid && data.profile.orcid) {
+                contactOrcid.textContent = data.profile.orcid;
+                contactOrcid.href = 'https://orcid.org/' + data.profile.orcid;
+            }
+            const contactLinkedin = document.getElementById('contactLinkedin');
+            if (contactLinkedin && data.profile.linkedin) {
+                contactLinkedin.textContent = data.profile.linkedinName || 'LinkedIn Profile';
+                contactLinkedin.href = data.profile.linkedin;
+            }
         }
 
         // Render experience

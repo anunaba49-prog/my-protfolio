@@ -180,6 +180,15 @@ function renderLists() {
         </div>
     `).join('');
 
+    // Journal Logos
+    const logoList = document.getElementById('logoList');
+    logoList.innerHTML = (portfolioData.journalLogos || []).map(l => `
+        <div class="list-item">
+            <div class="list-item-info"><h4>${l.name}</h4><p>${l.path}</p></div>
+            <button class="btn-delete" onclick="deleteItem('journalLogos','${l.id}')"><i class="fas fa-trash"></i></button>
+        </div>
+    `).join('');
+
     // Collaborators
     const collabList = document.getElementById('collabList');
     collabList.innerHTML = (portfolioData.collaborators || []).map(c => `
@@ -331,6 +340,16 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
             message: document.getElementById('fbMessage').value
         })
     });
+    e.target.reset();
+    loadData();
+});
+
+document.getElementById('logoForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('name', document.getElementById('logoName').value);
+    formData.append('file', document.getElementById('logoFile').files[0]);
+    await fetch('/api/admin/journalLogos', { method: 'POST', body: formData });
     e.target.reset();
     loadData();
 });

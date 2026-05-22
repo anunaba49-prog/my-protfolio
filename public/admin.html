@@ -47,6 +47,7 @@
             <button class="admin-tab active" data-panel="profile"><i class="fas fa-user"></i> Profile</button>
             <button class="admin-tab" data-panel="stats"><i class="fas fa-chart-bar"></i> Stats</button>
             <button class="admin-tab" data-panel="publications"><i class="fas fa-book"></i> Publications</button>
+            <button class="admin-tab" data-panel="journalLogos"><i class="fas fa-image"></i> Journal Logos</button>
             <button class="admin-tab" data-panel="students"><i class="fas fa-users"></i> Students</button>
             <button class="admin-tab" data-panel="collaborators"><i class="fas fa-handshake"></i> Collaborators</button>
             <button class="admin-tab" data-panel="gallery"><i class="fas fa-images"></i> Gallery</button>
@@ -121,6 +122,20 @@
                     <button type="submit" class="btn-admin">Add Publication</button>
                 </form>
                 <div class="items-list" id="pubList"></div>
+            </div>
+
+            <!-- Journal Logos Panel -->
+            <div class="admin-panel" id="panel-journalLogos">
+                <h2>Manage Journal Logos</h2>
+                <p style="color:#a0aac0;margin-bottom:1rem;">Upload logos of journals where papers are published. They will scroll on the public site.</p>
+                <form id="logoForm" class="admin-form" enctype="multipart/form-data">
+                    <label>Journal Name</label>
+                    <input type="text" id="logoName" placeholder="e.g. Nature, Elsevier, Springer" required>
+                    <label>Logo Image</label>
+                    <input type="file" id="logoFile" accept="image/*" required>
+                    <button type="submit" class="btn-admin">Upload Logo</button>
+                </form>
+                <div class="items-list" id="logoList"></div>
             </div>
 
             <!-- Students Panel -->

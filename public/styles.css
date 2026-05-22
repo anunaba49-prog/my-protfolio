@@ -1424,6 +1424,71 @@ body.dark-theme .collaborators-section {
 
 .empty-message { text-align: center; color: var(--text-light); padding: 2rem; }
 
+/* Journal Logos Marquee */
+.journal-logos-section {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.journal-logos-title {
+    color: #a0aac0;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+}
+
+.journal-logos-marquee {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.journal-logos-marquee::before,
+.journal-logos-marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    z-index: 2;
+}
+
+.journal-logos-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, #0a0e27, transparent);
+}
+
+.journal-logos-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, #0a0e27, transparent);
+}
+
+.journal-logos-track {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    animation: marqueeScroll 20s linear infinite;
+    width: max-content;
+}
+
+.journal-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0.8);
+    transition: filter 0.3s ease;
+}
+
+.journal-logo:hover {
+    filter: brightness(1.2);
+}
+
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
 /* Dark theme for new sections */
 body.dark-theme .student-card,
 body.dark-theme .feedback-card,

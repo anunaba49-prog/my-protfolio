@@ -72,6 +72,15 @@ async function loadPortfolioData() {
             }
         }
 
+        // Render journal logos marquee
+        if (data.journalLogos && data.journalLogos.length > 0) {
+            const track = document.getElementById('journalLogosTrack');
+            if (track) {
+                const logos = data.journalLogos.map(l => `<img src="${l.path}" alt="${l.name}" title="${l.name}" class="journal-logo">`).join('');
+                track.innerHTML = logos + logos;
+            }
+        }
+
         // Render collaborators
         if (data.collaborators && data.collaborators.length > 0) {
             const grid = document.getElementById('collaboratorsGrid');

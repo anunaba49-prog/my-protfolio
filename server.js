@@ -340,6 +340,28 @@ app.delete('/api/admin/certificates/:id', requireAuth, (req, res) => {
     res.json({ success: true });
 });
 
+// Journal Logos CRUD
+app.post('/api/admin/journalLogos', requireAuth, upload.single('file'), (req, res) => {
+    if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+    const data = getData();
+    if (!data.journalLogos) data.journalLogos = [];
+    const logo = {
+        id: Date.now().toString(),
+        name: req.body.name || '',
+        path: '/uploads/photos/' + req.file.filename
+    };
+    data.journalLogos.push(logo);
+    saveData(data);
+    res.json({ success: true, logo });
+});
+
+app.delete('/api/admin/journalLogos/:id', requireAuth, (req, res) => {
+    const data = getData();
+    data.journalLogos = (data.journalLogos || []).filter(l => l.id !== req.params.id);
+    saveData(data);
+    res.json({ success: true });
+});
+
 // Collaborators CRUD
 app.post('/api/admin/collaborators', requireAuth, upload.single('file'), (req, res) => {
     if (!req.file) return res.status(400).json({ error: 'No photo uploaded' });

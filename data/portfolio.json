@@ -23,7 +23,13 @@
   "videos": [],
   "certificates": [],
   "collaborators": [],
-  "journalLogos": [],
+  "journalLogos": [
+    {
+      "id": "1779459141241",
+      "name": "Scopus",
+      "path": "/uploads/photos/1779459141234-scopus-logo.jpg"
+    }
+  ],
   "feedback": [],
   "experience": [
     {

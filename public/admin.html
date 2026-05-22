@@ -46,6 +46,8 @@
         <nav class="admin-nav">
             <button class="admin-tab active" data-panel="profile"><i class="fas fa-user"></i> Profile</button>
             <button class="admin-tab" data-panel="stats"><i class="fas fa-chart-bar"></i> Stats</button>
+            <button class="admin-tab" data-panel="about"><i class="fas fa-info-circle"></i> About</button>
+            <button class="admin-tab" data-panel="research"><i class="fas fa-flask"></i> Research</button>
             <button class="admin-tab" data-panel="publications"><i class="fas fa-book"></i> Publications</button>
             <button class="admin-tab" data-panel="journalLogos"><i class="fas fa-image"></i> Journal Logos</button>
             <button class="admin-tab" data-panel="students"><i class="fas fa-users"></i> Students</button>
@@ -106,6 +108,65 @@
                     <label>h-index</label>
                     <input type="number" id="sHindex" placeholder="Number">
                     <button type="submit" class="btn-admin">Save Stats</button>
+                </form>
+            </div>
+
+            <!-- About Panel -->
+            <div class="admin-panel" id="panel-about">
+                <h2>Edit About Section</h2>
+                <h3>Education</h3>
+                <form id="educationForm" class="admin-form">
+                    <label>Education entries (one per line: Degree | Institution)</label>
+                    <textarea id="eduEntries" rows="5" placeholder="Ph.D. in Applied Physics | Lovely Professional University, 2021"></textarea>
+                    <button type="submit" class="btn-admin">Save Education</button>
+                </form>
+                <h3>PhD Research</h3>
+                <form id="phdResearchForm" class="admin-form">
+                    <label>Thesis Title</label>
+                    <input type="text" id="phdTitle" placeholder="Thesis title">
+                    <label>Description</label>
+                    <textarea id="phdDesc" rows="3" placeholder="Brief description"></textarea>
+                    <button type="submit" class="btn-admin">Save PhD Research</button>
+                </form>
+                <h3>Current Role</h3>
+                <form id="currentRoleForm" class="admin-form">
+                    <label>Title</label>
+                    <input type="text" id="roleTitle" placeholder="e.g. Assistant Professor">
+                    <label>Department</label>
+                    <input type="text" id="roleDept" placeholder="Department">
+                    <label>Institution</label>
+                    <input type="text" id="roleInst" placeholder="Institution">
+                    <label>Responsibility</label>
+                    <input type="text" id="roleResp" placeholder="Key responsibility">
+                    <button type="submit" class="btn-admin">Save Current Role</button>
+                </form>
+                <h3>Guidance & Mentorship</h3>
+                <form id="guidanceForm" class="admin-form">
+                    <label>BSc Capstone Projects</label>
+                    <input type="number" id="guidBsc" placeholder="Number">
+                    <label>MSc Dissertations</label>
+                    <input type="number" id="guidMsc" placeholder="Number">
+                    <label>PhD Students</label>
+                    <input type="number" id="guidPhd" placeholder="Number">
+                    <label>Collaborative Projects</label>
+                    <input type="number" id="guidCollab" placeholder="Number">
+                    <button type="submit" class="btn-admin">Save Guidance</button>
+                </form>
+            </div>
+
+            <!-- Research Panel -->
+            <div class="admin-panel" id="panel-research">
+                <h2>Edit Research Interests</h2>
+                <form id="researchForm" class="admin-form">
+                    <label>Research interests (one per line: Icon Class | Title | Description)</label>
+                    <textarea id="researchEntries" rows="8" placeholder="fas fa-cube | Nanotechnology | Exploring nanoscale materials"></textarea>
+                    <button type="submit" class="btn-admin">Save Research Interests</button>
+                </form>
+                <h3>Technical Skills</h3>
+                <form id="skillsForm" class="admin-form">
+                    <label>Skills (comma separated)</label>
+                    <textarea id="skillsEntries" rows="3" placeholder="FESEM, FTIR Spectroscopy, etc."></textarea>
+                    <button type="submit" class="btn-admin">Save Skills</button>
                 </form>
             </div>
 

@@ -208,6 +208,48 @@ app.put('/api/admin/stats', requireAuth, (req, res) => {
     res.json({ success: true, stats: data.stats });
 });
 
+app.put('/api/admin/education', requireAuth, (req, res) => {
+    const data = getData();
+    data.education = req.body.education || data.education;
+    saveData(data);
+    res.json({ success: true });
+});
+
+app.put('/api/admin/phdResearch', requireAuth, (req, res) => {
+    const data = getData();
+    data.phdResearch = { ...data.phdResearch, ...req.body };
+    saveData(data);
+    res.json({ success: true });
+});
+
+app.put('/api/admin/currentRole', requireAuth, (req, res) => {
+    const data = getData();
+    data.currentRole = { ...data.currentRole, ...req.body };
+    saveData(data);
+    res.json({ success: true });
+});
+
+app.put('/api/admin/researchInterests', requireAuth, (req, res) => {
+    const data = getData();
+    data.researchInterests = req.body.researchInterests || data.researchInterests;
+    saveData(data);
+    res.json({ success: true });
+});
+
+app.put('/api/admin/skills', requireAuth, (req, res) => {
+    const data = getData();
+    data.skills = req.body.skills || data.skills;
+    saveData(data);
+    res.json({ success: true });
+});
+
+app.put('/api/admin/guidance', requireAuth, (req, res) => {
+    const data = getData();
+    data.guidance = { ...data.guidance, ...req.body };
+    saveData(data);
+    res.json({ success: true });
+});
+
 // Profile picture upload
 const profileStorage = multer.diskStorage({
     destination: (req, file, cb) => {

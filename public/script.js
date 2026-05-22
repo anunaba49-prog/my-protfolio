@@ -71,6 +71,56 @@ async function loadPortfolioData() {
             }
         }
 
+        // Render education
+        if (data.education && data.education.length > 0) {
+            const eduList = document.getElementById('educationList');
+            if (eduList) {
+                eduList.innerHTML = data.education.map(e => `<div class="edu-item"><h4>${e.degree}</h4><p>${e.institution}</p></div>`).join('');
+            }
+        }
+
+        // Render PhD Research
+        if (data.phdResearch) {
+            const phdTitle = document.getElementById('phdResearchTitle');
+            const phdDesc = document.getElementById('phdResearchDesc');
+            if (phdTitle) phdTitle.textContent = '"' + data.phdResearch.title + '"';
+            if (phdDesc) phdDesc.textContent = data.phdResearch.description;
+        }
+
+        // Render Current Role
+        if (data.currentRole) {
+            const roleEl = document.getElementById('currentRoleContent');
+            if (roleEl) {
+                roleEl.innerHTML = `<p><strong>${data.currentRole.title}</strong></p><p>${data.currentRole.department}</p><p>${data.currentRole.institution}</p><p class="role-desc">${data.currentRole.responsibility}</p>`;
+            }
+        }
+
+        // Render Research Interests
+        if (data.researchInterests && data.researchInterests.length > 0) {
+            const grid = document.getElementById('researchGrid');
+            if (grid) {
+                grid.innerHTML = data.researchInterests.map(r => `<div class="research-card"><div class="research-icon"><i class="${r.icon}"></i></div><h3>${r.title}</h3><p>${r.description}</p></div>`).join('');
+            }
+        }
+
+        // Render Skills
+        if (data.skills && data.skills.length > 0) {
+            const skillsGrid = document.getElementById('skillsGrid');
+            if (skillsGrid) {
+                skillsGrid.innerHTML = data.skills.map(s => `<div class="skill-badge">${s}</div>`).join('');
+            }
+        }
+
+        // Render Guidance
+        if (data.guidance) {
+            const g = data.guidance;
+            const el = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val; };
+            el('guidBscNum', g.bscProjects);
+            el('guidMscNum', g.mscDissertations);
+            el('guidPhdNum', g.phdStudents);
+            el('guidCollabNum', g.collaborativeProjects);
+        }
+
         // Render publications
         const pubList = document.getElementById('publicationList');
         if (pubList) {

@@ -112,6 +112,7 @@ async function loadData() {
 function populateFields() {
     const p = portfolioData.profile || {};
     const s = portfolioData.stats || {};
+    const g = portfolioData.guidance || {};
     document.getElementById('pName').value = p.name || '';
     document.getElementById('pTitle').value = p.title || '';
     document.getElementById('pDesc').value = p.description || '';
@@ -127,6 +128,22 @@ function populateFields() {
     document.getElementById('sPublications').value = s.publications || '';
     document.getElementById('sExperience').value = s.yearsExperience || '';
     document.getElementById('sHindex').value = s.hIndex || '';
+    // About
+    document.getElementById('eduEntries').value = (portfolioData.education || []).map(e => e.degree + ' | ' + e.institution).join('\n');
+    document.getElementById('phdTitle').value = (portfolioData.phdResearch || {}).title || '';
+    document.getElementById('phdDesc').value = (portfolioData.phdResearch || {}).description || '';
+    const r = portfolioData.currentRole || {};
+    document.getElementById('roleTitle').value = r.title || '';
+    document.getElementById('roleDept').value = r.department || '';
+    document.getElementById('roleInst').value = r.institution || '';
+    document.getElementById('roleResp').value = r.responsibility || '';
+    document.getElementById('guidBsc').value = g.bscProjects || '';
+    document.getElementById('guidMsc').value = g.mscDissertations || '';
+    document.getElementById('guidPhd').value = g.phdStudents || '';
+    document.getElementById('guidCollab').value = g.collaborativeProjects || '';
+    // Research
+    document.getElementById('researchEntries').value = (portfolioData.researchInterests || []).map(r => r.icon + ' | ' + r.title + ' | ' + r.description).join('\n');
+    document.getElementById('skillsEntries').value = (portfolioData.skills || []).join(', ');
 }
 
 function renderLists() {
@@ -390,5 +407,59 @@ document.getElementById('expForm').addEventListener('submit', async (e) => {
         })
     });
     e.target.reset();
+    loadData();
+});
+
+// About section forms
+document.getElementById('educationForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const lines = document.getElementById('eduEntries').value.split('\n').filter(l => l.trim());
+    const education = lines.map((l, i) => {
+        const parts = l.split('|').map(p => p.trim());
+        return { id: (i + 1).toString(), degree: parts[0] || '', institution: parts[1] || '' };
+    });
+    await fetch('/api/admin/education', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ education }) });
+    alert('Education saved!');
+    loadData();
+});
+
+document.getElementById('phdResearchForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await fetch('/api/admin/phdResearch', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title: document.getElementById('phdTitle').value, description: document.getElementById('phdDesc').value }) });
+    alert('PhD Research saved!');
+    loadData();
+});
+
+document.getElementById('currentRoleForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await fetch('/api/admin/currentRole', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title: document.getElementById('roleTitle').value, department: document.getElementById('roleDept').value, institution: document.getElementById('roleInst').value, responsibility: document.getElementById('roleResp').value }) });
+    alert('Current Role saved!');
+    loadData();
+});
+
+document.getElementById('guidanceForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await fetch('/api/admin/guidance', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ bscProjects: parseInt(document.getElementById('guidBsc').value), mscDissertations: parseInt(document.getElementById('guidMsc').value), phdStudents: parseInt(document.getElementById('guidPhd').value), collaborativeProjects: parseInt(document.getElementById('guidCollab').value) }) });
+    alert('Guidance saved!');
+    loadData();
+});
+
+document.getElementById('researchForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const lines = document.getElementById('researchEntries').value.split('\n').filter(l => l.trim());
+    const researchInterests = lines.map((l, i) => {
+        const parts = l.split('|').map(p => p.trim());
+        return { id: (i + 1).toString(), icon: parts[0] || 'fas fa-flask', title: parts[1] || '', description: parts[2] || '' };
+    });
+    await fetch('/api/admin/researchInterests', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ researchInterests }) });
+    alert('Research Interests saved!');
+    loadData();
+});
+
+document.getElementById('skillsForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const skills = document.getElementById('skillsEntries').value.split(',').map(s => s.trim()).filter(s => s);
+    await fetch('/api/admin/skills', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ skills }) });
+    alert('Skills saved!');
     loadData();
 });

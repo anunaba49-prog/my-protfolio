@@ -73,7 +73,7 @@
                 <div class="about-card">
                     <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
                     <h3>Education</h3>
-                    <div class="education-list">
+                    <div class="education-list" id="educationList">
                         <div class="edu-item"><h4>Ph.D. in Applied Physics</h4><p>Lovely Professional University, 2021</p></div>
                         <div class="edu-item"><h4>M.Sc. Physics</h4><p>Lovely Professional University, 2018</p></div>
                         <div class="edu-item"><h4>B.Sc. Physics</h4><p>Women's College, Tripura, 2016</p></div>
@@ -82,16 +82,18 @@
                 <div class="about-card">
                     <div class="card-icon"><i class="fas fa-microscope"></i></div>
                     <h3>PhD Research</h3>
-                    <p class="thesis-title">"Acoustic and thermodynamic parameter investigations in the mixture containing vitamin B with glycols using ultrasonic technique."</p>
-                    <p class="thesis-desc">Advanced research in pharmaceutical mixture characterization using cutting-edge ultrasonic techniques.</p>
+                    <p class="thesis-title" id="phdResearchTitle">"Acoustic and thermodynamic parameter investigations in the mixture containing vitamin B with glycols using ultrasonic technique."</p>
+                    <p class="thesis-desc" id="phdResearchDesc">Advanced research in pharmaceutical mixture characterization using cutting-edge ultrasonic techniques.</p>
                 </div>
                 <div class="about-card">
                     <div class="card-icon"><i class="fas fa-briefcase"></i></div>
                     <h3>Current Role</h3>
-                    <p><strong>Assistant Professor</strong></p>
-                    <p>Department of Physics</p>
-                    <p>Lovely Professional University</p>
-                    <p class="role-desc">Faculty In-charge of Laboratory in Central Instrumentation Facility</p>
+                    <div id="currentRoleContent">
+                        <p><strong>Assistant Professor</strong></p>
+                        <p>Department of Physics</p>
+                        <p>Lovely Professional University</p>
+                        <p class="role-desc">Faculty In-charge of Laboratory in Central Instrumentation Facility</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -99,7 +101,7 @@
         <!-- Research Section -->
         <section id="research" class="section research-section">
             <div class="section-header"><h2>Research Interests</h2><div class="header-line"></div></div>
-            <div class="research-grid">
+            <div class="research-grid" id="researchGrid">
                 <div class="research-card"><div class="research-icon"><i class="fas fa-cube"></i></div><h3>Nanotechnology</h3><p>Exploring nanoscale materials and nanoelectronics for advanced applications</p></div>
                 <div class="research-card"><div class="research-icon"><i class="fas fa-lightbulb"></i></div><h3>Optoelectronics</h3><p>Developing optical and electronic devices for sensing applications</p></div>
                 <div class="research-card"><div class="research-icon"><i class="fas fa-leaf"></i></div><h3>Green Energy</h3><p>Advancing sustainable energy generation and storage technologies</p></div>
@@ -109,7 +111,7 @@
             </div>
             <div class="skills-section">
                 <h3>Technical Skills & Instrumentation</h3>
-                <div class="skills-grid">
+                <div class="skills-grid" id="skillsGrid">
                     <div class="skill-badge">FESEM</div>
                     <div class="skill-badge">FTIR Spectroscopy</div>
                     <div class="skill-badge">Fluorescence Spectrophotometer</div>
@@ -127,10 +129,10 @@
             <div class="guidance-section">
                 <h3>Research Guidance & Mentorship</h3>
                 <div class="guidance-grid">
-                    <div class="guidance-item"><div class="guidance-number">2</div><p>BSc Capstone Projects</p></div>
-                    <div class="guidance-item"><div class="guidance-number">1</div><p>MSc Dissertations</p></div>
-                    <div class="guidance-item"><div class="guidance-number">4</div><p>PhD Students</p></div>
-                    <div class="guidance-item"><div class="guidance-number">6</div><p>Collaborative Projects</p></div>
+                    <div class="guidance-item"><div class="guidance-number" id="guidBscNum">2</div><p>BSc Capstone Projects</p></div>
+                    <div class="guidance-item"><div class="guidance-number" id="guidMscNum">1</div><p>MSc Dissertations</p></div>
+                    <div class="guidance-item"><div class="guidance-number" id="guidPhdNum">4</div><p>PhD Students</p></div>
+                    <div class="guidance-item"><div class="guidance-number" id="guidCollabNum">6</div><p>Collaborative Projects</p></div>
                 </div>
             </div>
         </section>

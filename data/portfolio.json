@@ -9,13 +9,44 @@
     "linkedin": "http://linkedin.com/in/dr-nabaparna-chakraborty-aa13121b5",
     "scopus": "https://www.scopus.com/authid/detail.uri?authorId=57202991199",
     "googleScholar": "https://scholar.google.co.in/citations?user=WiznphUAAAAJ&hl=en",
-    "researchGate": "https://www.researchgate.net/profile/Nabaparna-Chakraborty-2"
+    "researchGate": "https://www.researchgate.net/profile/Nabaparna-Chakraborty-2",
+    "linkedinName": "Dr. Nabaparna Chakraborty"
   },
   "stats": {
     "phdStudents": 4,
     "publications": "50+",
     "yearsExperience": "4+",
     "hIndex": 18
+  },
+  "education": [
+    { "id": "1", "degree": "Ph.D. in Applied Physics", "institution": "Lovely Professional University, 2021" },
+    { "id": "2", "degree": "M.Sc. Physics", "institution": "Lovely Professional University, 2018" },
+    { "id": "3", "degree": "B.Sc. Physics", "institution": "Women's College, Tripura, 2016" }
+  ],
+  "phdResearch": {
+    "title": "Acoustic and thermodynamic parameter investigations in the mixture containing vitamin B with glycols using ultrasonic technique.",
+    "description": "Advanced research in pharmaceutical mixture characterization using cutting-edge ultrasonic techniques."
+  },
+  "currentRole": {
+    "title": "Assistant Professor",
+    "department": "Department of Physics",
+    "institution": "Lovely Professional University",
+    "responsibility": "Faculty In-charge of Laboratory in Central Instrumentation Facility"
+  },
+  "researchInterests": [
+    { "id": "1", "icon": "fas fa-cube", "title": "Nanotechnology", "description": "Exploring nanoscale materials and nanoelectronics for advanced applications" },
+    { "id": "2", "icon": "fas fa-lightbulb", "title": "Optoelectronics", "description": "Developing optical and electronic devices for sensing applications" },
+    { "id": "3", "icon": "fas fa-leaf", "title": "Green Energy", "description": "Advancing sustainable energy generation and storage technologies" },
+    { "id": "4", "icon": "fas fa-dna", "title": "Biosensing", "description": "Creating sensitive biosensors for biomedical applications" },
+    { "id": "5", "icon": "fas fa-wave-square", "title": "Acoustics", "description": "Investigating acoustic and thermodynamic properties of materials" },
+    { "id": "6", "icon": "fas fa-flask", "title": "Soft Materials", "description": "Understanding interfacial phenomena in complex systems" }
+  ],
+  "skills": ["FESEM", "FTIR Spectroscopy", "Fluorescence Spectrophotometer", "Electrochemical Workstation", "Anton Paar DSA", "UV-Visible Spectrophotometer"],
+  "guidance": {
+    "bscProjects": 2,
+    "mscDissertations": 1,
+    "phdStudents": 4,
+    "collaborativeProjects": 6
   },
   "publications": [],
   "students": [],
